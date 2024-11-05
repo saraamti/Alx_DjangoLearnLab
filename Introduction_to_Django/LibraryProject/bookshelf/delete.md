@@ -1,9 +1,8 @@
-# Delete Operation
+from bookshelf.models import Book
 
-```python
 # Delete the book instance
 book = Book.objects.get(title="Nineteen Eighty-Four")
 book.delete()
+# Expected output
+# (1, {'bookshelf.Book': 1})
 
-# Confirm deletion by checking if any books exist
-Book.objects.all()
