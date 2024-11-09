@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
-from .models import Book, Library  # Ensure this line includes Library as well as Book
+from .models import Library  # Ensure this line includes Library as well as Book
 
 # Function-based view to list all books
 def list_books(request):
