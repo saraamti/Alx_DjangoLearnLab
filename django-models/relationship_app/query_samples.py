@@ -21,7 +21,7 @@ def query_books_by_author(author_name):
 # 2. List all books in a library
 def list_books_in_library(library_name):
     try:
-        library = Library.objects.get(library=library_name)
+        library = Library.objects.get(name=library_name)
         books = library.books.all()  # Access the ManyToManyField relationship
         print(f"Books in {library_name} library:")
         for book in books:
