@@ -32,7 +32,7 @@ def list_books_in_library(library_name):
 # 3. Retrieve the librarian for a library
 def retrieve_librarian_for_library(library_name):
     try:
-        library = Library.objects.get(library=library_name)
+        library = Librarian.objects.get(library=library_name)
         librarian = library.librarian  # Access the OneToOneField relationship
         print(f"Librarian for {library_name} library: {librarian.name}")
     except Library.DoesNotExist:
