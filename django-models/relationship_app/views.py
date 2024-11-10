@@ -15,9 +15,8 @@ class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
-
-    def is_admin(user):
-    return user.userprofile.role == 'Admin'
+def __str__(self):
+        return f"{self.user.username} - {self.role}"
 
 def is_librarian(user):
     return user.userprofile.role == 'Librarian'
