@@ -46,7 +46,8 @@ def register(request):
 # views.py
 
 def is_admin(user):
-    return user.userprofile.role == 'Admin'
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+
 
 def is_librarian(user):
     return user.userprofile.role == 'Librarian'
