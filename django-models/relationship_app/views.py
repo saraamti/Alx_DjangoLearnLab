@@ -19,7 +19,7 @@ class LibraryDetailView(DetailView):
     template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
 
-   def get_object(self):
+    def get_object(self):
         return Library.objects.get(name = "Cairo")
 
     def get_context_data(self, **kwargs):
