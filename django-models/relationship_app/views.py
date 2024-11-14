@@ -71,7 +71,7 @@ def member_view(request):
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required
-from .models import Book
+from .models import Book 
 from .forms import BookForm
 
 @permission_required('relationship_app.can_add_book')
