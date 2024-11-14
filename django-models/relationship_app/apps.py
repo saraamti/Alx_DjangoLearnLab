@@ -6,4 +6,4 @@ class RelationshipAppConfig(AppConfig):
     name = 'relationship_app'
 def ready(self):
         # Import the signals here
-        import relationship_app.signals
+        import relationship_app.signal
