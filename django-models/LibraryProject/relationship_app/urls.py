@@ -1,22 +1,20 @@
 from django.urls import path
-from .views import admin_view
-from .views import librarian_view
-from .views import member_view
 from . import views
-from .views import list_books, LibraryDetailView, register
-from django.contrib.auth.views import LoginView, LogoutView
-from .views import add_book, edit_book, delete_book
 
 urlpatterns = [
-     path('books/', list_books, name='book-list'),
-    path('library/', LibraryDetailView.as_view(), name = "library-detail"),
-    path('login/', LoginView.as_view(template_name= 'relationship_app/login.html'), name = 'login'),
-    path('logout/', LogoutView.as_view(template_name= 'relationship_app/logout.html'), name = 'logout'),
-    path('register/', views.register.as_view(), name = "register"),
-    path('admin/', admin_view, name='admin-view'),
-    path('librarian/', librarian_view, name='librarian-view'),
-    path('member/', member_view, name='member-view'),
-    path('add_book/', add_book, name='add-book'),
-    path('edit_book/', edit_book, name='edit-book'),
-    path('delete_book/', delete_book, name='delete-book'),
+    path('booklist/',views.booklist, name = "booklist"),
+    path('librarylist/<int:pk>/',views.LibraryListView.as_view(), name ="librarylist"),
+    path('adminsonly/', views.admin_view, name = "admin"),
+    path('librarian/', views.librarian_view, name = "librarian"),
+    path('member/', views.member_view, name = 'member'),
+    path('login/', views.login.as_view(), name = 'login'),
+    path('logout/',views.logout.as_view(), name = 'logout'),
+    path('register/',views.register.as_view(), name = 'register'),
+    path('profile/', views.ProfileView.as_view(), name = 'profile'),
+    path('admin/', views.admin_view, name = 'admin_view'),
+    path('librarian/', views.librarian_view, name = 'librarian_view'),
+    path('member/', views.member_view, name = 'member_view'),
+    path('add_book/', views.add_book, name = 'add_book'),
+    path('edit_book/', views.edit_book, name = 'edit_book'),
+    path('delete_book/', views.delete_book, name='delete_book'),
 ]
