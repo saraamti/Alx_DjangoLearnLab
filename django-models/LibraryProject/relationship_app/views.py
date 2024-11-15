@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .models import Author, Book, Library, UserProfile
 from .forms import BookForm
+from .models import Library
+
 
 # Function-based view to list books
 def list_books(request):
