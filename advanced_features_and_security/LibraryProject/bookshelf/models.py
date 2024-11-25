@@ -25,7 +25,7 @@ class CustomUser(AbstractUser):
 class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    publication_year = models.IntegerField()
+    publication_year = models.IntegerField(default=2000)
 
     class Meta:
         permissions = [
