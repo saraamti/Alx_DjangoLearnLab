@@ -12,6 +12,12 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Book
 from .serializers import BookSerializer
+from rest_framework import filters  # Correct import for SearchFilter and OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend  # For DjangoFilterBackend
+
+
+
+
 
 # ListView to retrieve all books and CreateView to add a new book
 class BookListCreateView(generics.ListCreateAPIView):
