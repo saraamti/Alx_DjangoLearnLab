@@ -1,23 +1,27 @@
-from rest_framework import status, generics
+from django.shortcuts import render
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
-from .models import CustomUser
-from .serializers import RegisterSerializer, UserSerializer, TokenSerializer
+from rest_framework.authtoken.models import Token
+from rest_framework import status
+from .serializers import RegisterSerializer, UserSerializer
 
-class RegisterView(generics.CreateAPIView):
-    serializer_class = RegisterSerializer
-
-class LoginView(generics.GenericAPIView):
+class RegisterView(APIView):
     def post(self, request):
-        # Logic for login and token generation
-        user = CustomUser.objects.get(username=request.data['username'])
-        refresh = RefreshToken.for_user(user)
-        return Response({
-            'access': str(refresh.access_token),
-            'refresh': str(refresh)
-        })
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class UserProfileView(generics.RetrieveUpdateAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+class LoginView(APIView):
+    def post(self, request):
+        from django.contrib.auth import authenticate
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key})
+        return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
